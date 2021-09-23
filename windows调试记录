@@ -1,0 +1,12 @@
+1================tools/create-packages.rb  ruby脚本运行总结
+a.安装ruby
+b.下载zip.exe,并配置环境变量
+c.下载并配置Xmllint环境变量
+d.修改create-packages.rb脚本的 strip_prefix （82行）方法，修改return string.sub(prefix,"") 为return string.sub("#{prefix}/","")， 目的是去掉文件名前面的/,否则zip识别不了
+e.修改config-template.js 打包模板配置
+f.命令行如ruby create-packages_modify.rb -u F:\xxxxx\updater.exe -v 1.1 -p win32 F:\\tools\\input_dir config-template.js F:\xxxx\outputdir
+  -u后面跟的是updater.exe的全路径+名字， -v后面跟的是版本号， -p后面是平台（做标记用）， 后面是三个命令行argv参数，argv[0]是要打包的程序目录  argv[1]是打包的json配置，argv[2]是输出目录
+2================修改config-template.js 打包模板配置
+a.packages：app压缩包的名字（压缩包包含所有要更新安装的文件和文件夹）
+b.updater-binary: 更新辅助程序的名字 updater.exe，如果自定义了名字，需要根据自定义修改
+c.main-binary: 程序的执行启动文件，如electron.exe
